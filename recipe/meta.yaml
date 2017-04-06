@@ -18,11 +18,15 @@ build:
 
 requirements:
   build:
+    - {{ compiler('c') }}
+
+  host:
     - python
     - setuptools
-    - toolchain
+
   run:
     - python
+    - setuptools
 
 test:
   commands:
@@ -50,3 +54,4 @@ extra:
     - synapticarbors
     - isuruf
     - scopatz
+    - mingwandroid
