@@ -18,13 +18,19 @@ build:
 
 requirements:
   build:
+    - {{ compiler('c') }}
+
+  host:
     - python
     - pip
-    - toolchain
+
   run:
     - python
+    - setuptools
 
 test:
+  requires:
+    - {{ compiler('c') }}
   commands:
     - cython --version
   files:
@@ -50,3 +56,4 @@ extra:
     - synapticarbors
     - isuruf
     - scopatz
+    - mingwandroid
