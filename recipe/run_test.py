@@ -8,7 +8,6 @@ import Cython.Compiler.Visitor
 import Cython.Plex.Actions
 import Cython.Plex.Scanners
 import Cython.Runtime.refnanny
-
 import sys
 import os
 import subprocess
@@ -20,13 +19,18 @@ print('sys.prefix: %r' % sys.prefix)
 print('sys.version: %r' % sys.version)
 print('PATH: %r' % os.environ['PATH'])
 print('CWD: %r' % os.getcwd())
+print('ENVIRON: %s' % os.environ)
 
 from distutils.spawn import find_executable
 from distutils.core import setup
 from distutils.extension import Extension
 from Cython.Distutils import build_ext
 
-if find_executable('gcc'):
+compiler = os.environ.get('CC', 'gcc')
+
+print('compiler determined as {}'.format(compiler))
+if find_executable(compiler):
+    print('found exectuable {}'.format(find_executable(compiler)))
     sys.argv[1:] = ['build_ext', '--inplace']
     setup(name='fib',
           cmdclass={'build_ext': build_ext},
