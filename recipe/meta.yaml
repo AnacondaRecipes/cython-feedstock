@@ -1,4 +1,4 @@
-{% set version="0.25.2" %}
+{% set version="0.26.1" %}
 
 package:
   name: cython
@@ -6,11 +6,11 @@ package:
 
 source:
   fn: Cython-{{ version }}.tar.gz
-  url: https://pypi.io/packages/source/C/Cython/Cython-{{ version }}.tar.gz
-  sha256: f141d1f9c27a07b5a93f7dc5339472067e2d7140d1c5a9e20112a5665ca60306
+  url: https://github.com/cython/cython/archive/{{ version }}.tar.gz
+  sha256: fcb0f3131f0ac186368dc1df0b70e2b5b1f4de94d74173044cfd3beff81e4255
 
 build:
-  number: 1
+  number: 0
   entry_points:
     - cython = Cython.Compiler.Main:setuptools_main
     - cythonize = Cython.Build.Cythonize:main
