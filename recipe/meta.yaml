@@ -10,7 +10,7 @@ source:
 
 build:
   number: 0
-  script: python -m pip install --no-deps --ignore-installed .
+  script: {{PYTHON}} -m pip install --no-deps --ignore-installed .
   entry_points:
     - cython = Cython.Compiler.Main:setuptools_main
     - cythonize = Cython.Build.Cythonize:main
