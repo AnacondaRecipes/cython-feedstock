@@ -24,14 +24,32 @@ requirements:
   host:
     - python
     - pip
+    - setuptools
+    - wheel
   run:
     - python
-    - setuptools
 
 test:
+  imports: 
+    - Cython
+    - Cython.Build
+    - Cython.Compiler
+    - Cython.Runtime
+    - Cython.Distutils
+    - Cython.Debugger
+    - Cython.Debugger.Tests
+    - Cython.Plex
+    - Cython.Tests
+    - Cython.Build.Tests
+    - Cython.Compiler.Tests
+    - Cython.Utility
+    - Cython.Tempita
+    - pyximport
   requires:
     - {{ compiler('c') }}
+    - pip
   commands:
+    - pip check
     - cython --version
   files:
     - fib.pyx
@@ -39,6 +57,7 @@ test:
 about:
   home: http://www.cython.org/
   license: Apache-2.0
+  license_family: Apache
   license_file: LICENSE.txt
   summary: The Cython compiler for writing C extensions for the Python language
   description: |
