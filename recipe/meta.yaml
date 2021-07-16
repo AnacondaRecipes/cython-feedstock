@@ -1,4 +1,4 @@
-{% set version = "0.29.23" %}
+{% set version = "0.29.24" %}
 
 package:
   name: cython
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/C/Cython/Cython-{{ version }}.tar.gz
-  sha256: 6a0d31452f0245daacb14c979c77e093eb1a546c760816b5eed0047686baad8e
+  sha256: cdf04d07c3600860e8c2ebaad4e8f52ac3feb212453c1764a49ac08c827e8443
 
 build:
   number: 0
@@ -24,14 +24,32 @@ requirements:
   host:
     - python
     - pip
+    - setuptools
+    - wheel
   run:
     - python
-    - setuptools
 
 test:
+  imports: 
+    - Cython
+    - Cython.Build
+    - Cython.Compiler
+    - Cython.Runtime
+    - Cython.Distutils
+    - Cython.Debugger
+    - Cython.Debugger.Tests
+    - Cython.Plex
+    - Cython.Tests
+    - Cython.Build.Tests
+    - Cython.Compiler.Tests
+    - Cython.Utility
+    - Cython.Tempita
+    - pyximport
   requires:
     - {{ compiler('c') }}
+    - pip
   commands:
+    - pip check
     - cython --version
   files:
     - fib.pyx
@@ -39,6 +57,7 @@ test:
 about:
   home: http://www.cython.org/
   license: Apache-2.0
+  license_family: Apache
   license_file: LICENSE.txt
   summary: The Cython compiler for writing C extensions for the Python language
   description: |
