@@ -1,4 +1,4 @@
-{% set version = "0.29.24" %}
+{% set version = "0.29.25" %}
 
 package:
   name: cython
@@ -6,7 +6,10 @@ package:
 
 source:
   url: https://pypi.io/packages/source/C/Cython/Cython-{{ version }}.tar.gz
-  sha256: cdf04d07c3600860e8c2ebaad4e8f52ac3feb212453c1764a49ac08c827e8443
+  sha256: a87cbe3756e7c464acf3e9420d8741e62d3b2eace0846cb39f664ad378aab284
+  patches:
+    # xref: https://github.com/cython/cython/pull/4236
+    - patches/pypy37-eval.patch
 
 build:
   number: 0
@@ -18,9 +21,10 @@ build:
 
 requirements:
   build:
-    - python                                 # [build_platform != target_platform]
     - {{ compiler('c') }}
-    - {{ compiler('cxx') }}    # [not (linux and aarch64)]
+    - {{ compiler('cxx') }}  # [not (linux and aarch64)]
+    - patch                  # [not win]
+    - m2-patch               # [win]
   host:
     - python
     - pip
@@ -30,26 +34,7 @@ requirements:
     - python
 
 test:
-  imports: 
-    - Cython
-    - Cython.Build
-    - Cython.Compiler
-    - Cython.Runtime
-    - Cython.Distutils
-    - Cython.Debugger
-    - Cython.Debugger.Tests
-    - Cython.Plex
-    - Cython.Tests
-    - Cython.Build.Tests
-    - Cython.Compiler.Tests
-    - Cython.Utility
-    - Cython.Tempita
-    - pyximport
-  requires:
-    - {{ compiler('c') }}
-    - pip
   commands:
-    - pip check
     - cython --version
   files:
     - fib.pyx
@@ -57,7 +42,6 @@ test:
 about:
   home: http://www.cython.org/
   license: Apache-2.0
-  license_family: Apache
   license_file: LICENSE.txt
   summary: The Cython compiler for writing C extensions for the Python language
   description: |
@@ -75,4 +59,3 @@ extra:
     - synapticarbors
     - isuruf
     - scopatz
-    - mingwandroid
