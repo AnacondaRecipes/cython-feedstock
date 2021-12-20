@@ -31,7 +31,7 @@ from distutils.core import setup
 from distutils.extension import Extension
 from Cython.Distutils import build_ext
 
-if not arm64 and find_executable('gcc'):
+if sys.platform != 'darwin' and find_executable('gcc'):
     sys.argv[1:] = ['build_ext', '--inplace']
     setup(name='fib',
           cmdclass={'build_ext': build_ext},
