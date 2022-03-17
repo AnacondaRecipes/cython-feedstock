@@ -50,6 +50,9 @@ test:
   commands:
     - pip check
     - cython --version
+    - cython --help
+    - cythonize --help
+    - cygdb --help
   files:
     - fib.pyx
 
