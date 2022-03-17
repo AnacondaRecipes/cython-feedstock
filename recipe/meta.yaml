@@ -1,15 +1,13 @@
+{% set name = "cython" %}
 {% set version = "0.29.28" %}
 
 package:
-  name: cython
+  name: {{ name|lower }}
   version: {{ version }}
 
 source:
   url: https://pypi.io/packages/source/C/Cython/Cython-{{ version }}.tar.gz
   sha256: d6fac2342802c30e51426828fe084ff4deb1b3387367cf98976bb2e64b6f8e45
-  patches:
-    # xref: https://github.com/cython/cython/pull/4236
-    - patches/pypy37-eval.patch
 
 build:
   number: 0
@@ -23,8 +21,6 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}  # [not (linux and aarch64)]
-    - patch                  # [not win]
-    - m2-patch               # [win]
   host:
     - python
     - pip
@@ -34,21 +30,40 @@ requirements:
     - python
 
 test:
+  imports:
+    - Cython
+    - Cython.Build
+    - Cython.Compiler
+    - Cython.Runtime
+    - Cython.Distutils
+    - Cython.Debugger
+    - Cython.Debugger.Tests
+    - Cython.Plex
+    - Cython.Tests
+    - Cython.Build.Tests
+    - Cython.Compiler.Tests
+    - Cython.Utility
+    - Cython.Tempita
+    - pyximport
+  requires:
+    - pip
   commands:
+    - pip check
     - cython --version
   files:
     - fib.pyx
 
 about:
-  home: http://www.cython.org/
+  home: https://cython.org/
   license: Apache-2.0
+  license_family: Apache
   license_file: LICENSE.txt
   summary: The Cython compiler for writing C extensions for the Python language
   description: |
     Cython is an optimising static compiler for both the Python programming
     language and the extended Cython programming language. It makes writing C
     extensions for Python as easy as Python itself.
-  doc_url: http://cython.org/#documentation
+  doc_url: https://cython.org/#documentation
   dev_url: https://github.com/cython/cython
 
 extra:
