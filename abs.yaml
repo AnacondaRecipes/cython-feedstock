@@ -8,4 +8,3 @@ build_parameters:
   #- "--skip-existing"
   - "--error-overlinking"
   - "--error-overdepending"
-  - "--no-test"
