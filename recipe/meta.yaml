@@ -44,7 +44,7 @@ test:
     - Cython.Compiler.Tests
     - Cython.Utility
     - Cython.Tempita
-    - pyximport
+    - pyximport # [py<312] See: https://github.com/cython/cython/issues/5285#issuecomment-1455043943
   requires:
     - pip
   commands:
