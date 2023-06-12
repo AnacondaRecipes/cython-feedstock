@@ -1,3 +1,4 @@
+import sys
 import platform
 is_cpython = platform.python_implementation() == 'CPython'
 
