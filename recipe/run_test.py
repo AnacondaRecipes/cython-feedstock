@@ -1,3 +1,4 @@
+import sys
 import platform
 is_cpython = platform.python_implementation() == 'CPython'
 
@@ -22,7 +23,9 @@ import Cython.Build.Tests
 import Cython.Compiler.Tests
 import Cython.Utility
 import Cython.Tempita
-import pyximport
+# See: https://github.com/cython/cython/issues/5285#issuecomment-1455043943
+if sys.version_info < (3, 12):
+    import pyximport
 
 if is_cpython:
     import Cython.Runtime.refnanny
