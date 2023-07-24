@@ -1,17 +1,17 @@
 {% set name = "cython" %}
-{% set version = "0.29.35" %}
+{% set version = "0.29.36" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/C/Cython/Cython-{{ version }}.tar.gz
-  sha256: 6e381fa0bf08b3c26ec2f616b19ae852c06f5750f4290118bf986b6f85c8c527
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/Cython-{{ version }}.tar.gz
+  sha256: 41c0cfd2d754e383c9eeb95effc9aa4ab847d0c9747077ddd7c0dcb68c3bc01f
 
 build:
   number: 0
-  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vv
   entry_points:
     - cython = Cython.Compiler.Main:setuptools_main
     - cythonize = Cython.Build.Cythonize:main
@@ -20,7 +20,6 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
-    - {{ compiler('cxx') }}  # [not (linux and aarch64)]
   host:
     - python
     - pip
@@ -56,10 +55,4 @@ about:
 
 extra:
   recipe-maintainers:
-    - jakirkham
-    - msarahan
-    - ocefpaf
-    - synapticarbors
-    - isuruf
-    - scopatz
-    - katietz
+    - cbouss
