@@ -16,8 +16,6 @@ build:
     - cython = Cython.Compiler.Main:setuptools_main
     - cythonize = Cython.Build.Cythonize:main
     - cygdb = Cython.Debugger.Cygdb:main
-  script: {{ PYTHON }} -m pip install . -vv
-  number: 0
 
 requirements:
   build:
