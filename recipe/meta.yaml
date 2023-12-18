@@ -1,5 +1,5 @@
 {% set name = "cython" %}
-{% set version = "3.0.0" %}
+{% set version = "3.0.6" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/Cython-{{ version }}.tar.gz
-  sha256: 350b18f9673e63101dbbfcf774ee2f57c20ac4636d255741d76ca79016b1bd82
+  sha256: 399d185672c667b26eabbdca420c98564583798af3bc47670a8a09e9f19dd660
 
 build:
   number: 0
@@ -29,16 +29,18 @@ requirements:
     - python
 
 test:
+  files:
+    - fib.pyx
   requires:
     - pip
+    # for distutils
+    - setuptools  # [py>=312]
   commands:
     - pip check
     - cython --version
     - cython --help
     - cythonize --help
     - cygdb --help
-  files:
-    - fib.pyx
 
 about:
   home: https://cython.org/
