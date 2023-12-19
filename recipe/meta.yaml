@@ -29,18 +29,26 @@ requirements:
     - python
 
 test:
+  source_files:
+    - runtests.py
+    - tests/
   files:
     - fib.pyx
   requires:
+    - {{ compiler('c') }}
+    - numpy
     - pip
+    - pythran
     # for distutils
     - setuptools  # [py>=312]
+    - setuptools <60  # [py<312]
   commands:
     - pip check
     - cython --version
     - cython --help
     - cythonize --help
     - cygdb --help
+    - python runtests.py -v --no-doctest --no-pyregr --no-code-style --no-refnanny --no-annotate
 
 about:
   home: https://cython.org/

@@ -23,9 +23,8 @@ import Cython.Build.Tests
 import Cython.Compiler.Tests
 import Cython.Utility
 import Cython.Tempita
-# See: https://github.com/cython/cython/issues/5285#issuecomment-1455043943
-if sys.version_info < (3, 12):
-    import pyximport
+
+import pyximport
 
 if is_cpython:
     import Cython.Runtime.refnanny
@@ -34,24 +33,26 @@ import sys
 import os
 import subprocess
 from pprint import pprint
-from os.path import isfile
 
-print('sys.executable: %r' % sys.executable)
-print('sys.prefix: %r' % sys.prefix)
-print('sys.version: %r' % sys.version)
-print('PATH: %r' % os.environ['PATH'])
-print('CWD: %r' % os.getcwd())
+pprint('sys.executable: %r' % sys.executable)
+pprint('sys.prefix: %r' % sys.prefix)
+pprint('sys.version: %r' % sys.version)
+pprint('PATH: %r' % os.environ['PATH'])
+pprint('CWD: %r' % os.getcwd())
 
-from distutils.spawn import find_executable
-from distutils.core import setup
-from distutils.extension import Extension
+try:
+    from setuptools import setup, Extension
+except ImportError:
+    from distutils.core import setup, Extension
 from Cython.Distutils import build_ext
+from shutil import which as find_executable
 
-if sys.platform != 'darwin' and find_executable('gcc'):
+
+if find_executable('gcc') or find_executable('clang'):
     sys.argv[1:] = ['build_ext', '--inplace']
     setup(name='fib',
-          cmdclass={'build_ext': build_ext},
-          ext_modules=[Extension("fib", ["fib.pyx"])])
+        cmdclass={'build_ext': build_ext},
+        ext_modules=[Extension("fib", ["fib.pyx"])])
 
     try:
         import fib
