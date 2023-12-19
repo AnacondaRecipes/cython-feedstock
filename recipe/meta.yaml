@@ -33,9 +33,7 @@ test:
     - fib.pyx
   requires:
     - pip
-    # for distutils
-    - setuptools  # [py>=312]
-    - setuptools <60  # [py<312]
+    - setuptools
     - {{ compiler('c') }}
     # for runtests.py
     #- numpy
@@ -49,7 +47,7 @@ test:
     # 2023/12/19: The upstream test suite is quite slow.
     # It requires files: `runtests.py`, the folder `tests/`, and dependencies: setuptools, numpy and pythran (optionally).
     # If you want to run refnanny tests then add to source_files `Cython/Runtime/refnanny.pyx` and remove --no-refnanny flag.
-    #- python runtests.py -v --no-doctest --no-pyregr --no-code-style --no-refnanny --no-annotate
+    #- python runtests.py -v --no-doctest --no-pyregr --no-code-style --no-refnanny --annotate
     # source_files:
     #   - runtests.py
     #   - tests/

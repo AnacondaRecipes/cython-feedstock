@@ -40,10 +40,7 @@ pprint('sys.version: %r' % sys.version)
 pprint('PATH: %r' % os.environ['PATH'])
 pprint('CWD: %r' % os.getcwd())
 
-try:
-    from setuptools import setup, Extension
-except ImportError:
-    from distutils.core import setup, Extension
+from setuptools import setup, Extension
 from Cython.Distutils import build_ext
 from shutil import which as find_executable
 
