@@ -29,26 +29,30 @@ requirements:
     - python
 
 test:
-  source_files:
-    - runtests.py
-    - tests/
   files:
     - fib.pyx
   requires:
-    - {{ compiler('c') }}
-    - numpy
     - pip
-    - pythran
     # for distutils
     - setuptools  # [py>=312]
     - setuptools <60  # [py<312]
+    - {{ compiler('c') }}
+    # for runtests.py
+    #- numpy
+    #- pythran
   commands:
     - pip check
     - cython --version
     - cython --help
     - cythonize --help
     - cygdb --help
-    - python runtests.py -v --no-doctest --no-pyregr --no-code-style --no-refnanny --no-annotate
+    # 2023/12/19: The upstream test suite is quite slow.
+    # It requires files: `runtests.py`, the folder `tests/`, and dependencies: setuptools, numpy and pythran (optionally).
+    # If you want to run refnanny tests then add to source_files `Cython/Runtime/refnanny.pyx` and remove --no-refnanny flag.
+    #- python runtests.py -v --no-doctest --no-pyregr --no-code-style --no-refnanny --no-annotate
+    # source_files:
+    #   - runtests.py
+    #   - tests/
 
 about:
   home: https://cython.org/
