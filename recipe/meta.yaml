@@ -1,13 +1,13 @@
 {% set name = "cython" %}
-{% set version = "3.0.10" %}
+{% set version = "3.1.0.dev1" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/Cython-{{ version }}.tar.gz
-  sha256: dcc96739331fb854dcf503f94607576cfe8488066c61ca50dfd55836f132de99
+  url: https://github.com/cython/cython/archive/10736826646c894b8b2c9cd3799ce7142707c8ed.zip
+  sha256: 2c8a6fb9697ab1ae7388169c53f056b1c79bfe008cbe43355685936095c6ba18
 
 build:
   number: 0
