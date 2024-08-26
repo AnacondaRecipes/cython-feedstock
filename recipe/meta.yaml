@@ -1,13 +1,13 @@
 {% set name = "cython" %}
-{% set version = "3.1.0.dev1" %}
+{% set version = "3.1.0.dev2" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/cython/cython/archive/10736826646c894b8b2c9cd3799ce7142707c8ed.zip
-  sha256: 2c8a6fb9697ab1ae7388169c53f056b1c79bfe008cbe43355685936095c6ba18
+  url: https://github.com/cython/cython/archive/7e2cd6ad57c9eeb1fc6bf5d2bea469888a3f9b61.zip
+  sha256: febc81bb02fed97a3562b9d62324ab11fbdd6a6decaa18d0e4ff4ab36a7e8753
 
 build:
   number: 0
