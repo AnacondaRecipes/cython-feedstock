@@ -50,8 +50,8 @@ from Cython.Distutils import build_ext
 if sys.platform != 'darwin' and find_executable('gcc'):
     sys.argv[1:] = ['build_ext', '--inplace']
     setup(name='fib',
-          cmdclass={'build_ext': build_ext},
-          ext_modules=[Extension("fib", ["fib.pyx"])])
+        cmdclass={'build_ext': build_ext},
+        ext_modules=[Extension("fib", ["fib.pyx"])])
 
     try:
         import fib
