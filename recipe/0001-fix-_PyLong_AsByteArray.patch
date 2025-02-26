@@ -1,0 +1,29 @@
+From 3e9cf61eeb953babc16ffbe98e47b1324cc1eabd Mon Sep 17 00:00:00 2001
+From: Andrii Osipov <aosipov@anaconda.com>
+Date: Wed, 26 Feb 2025 13:49:36 -0800
+Subject: [PATCH] fix _PyLong_AsByteArray
+
+---
+ Cython/Utility/TypeConversion.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/Cython/Utility/TypeConversion.c b/Cython/Utility/TypeConversion.c
+index 4048149..46e74a7 100644
+--- a/Cython/Utility/TypeConversion.c
++++ b/Cython/Utility/TypeConversion.c
+@@ -988,7 +988,11 @@ static CYTHON_INLINE {{TYPE}} {{FROM_PY_FUNCTION}}(PyObject *x) {
+                 unsigned char *bytes = (unsigned char *)&val;
+                 int ret = _PyLong_AsByteArray((PyLongObject *)v,
+                                               bytes, sizeof(val),
+-                                              is_little, !is_unsigned);
++                                              is_little, !is_unsigned
++#if PY_VERSION_HEX >= 0x030d00a4
++                                              , 1 // with_exceptions
++#endif              
++                                              );
+                 Py_DECREF(v);
+                 if (likely(!ret))
+                     return val;
+-- 
+2.39.3 (Apple Git-146)
+
