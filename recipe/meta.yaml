@@ -8,6 +8,8 @@ package:
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/Cython-{{ version }}.tar.gz
   sha256: f813d4a6dd94adee5d4ff266191d1d95bf6d4164a4facc535422c021b2504cfb
+  patches:
+    - 0001-fix-_PyLong_AsByteArray.patch
 
 build:
   number: 1
@@ -19,6 +21,8 @@ build:
 
 requirements:
   build:
+    - patch  # [not win]
+    - m2-patch  # [win]
     - {{ compiler('c') }}
   host:
     - python
