@@ -1,13 +1,13 @@
 {% set name = "cython" %}
-{% set version = "3.1.4" %}
+{% set version = "3.2.2" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 9aefefe831331e2d66ab31799814eae4d0f8a2d246cbaaaa14d1be29ef777683
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: c3add3d483acc73129a61d105389344d792c17e7c1cee24863f16416bd071634
 
 build:
   number: 0
@@ -40,6 +40,7 @@ test:
     - pip
     - setuptools
     - {{ compiler('c') }}
+    - {{ stdlib('c') }}
     # for runtests.py
     #- numpy
     #- pythran
