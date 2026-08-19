@@ -16,7 +16,7 @@ build:
     - cython = Cython.Compiler.Main:setuptools_main
     - cythonize = Cython.Build.Cythonize:main
     - cygdb = Cython.Debugger.Cygdb:main
-  skip: true  # [py<310]
+  skip: true  # [py<315 or py>=316]
 
 requirements:
   build:
