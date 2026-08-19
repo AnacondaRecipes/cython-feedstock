@@ -20,7 +20,12 @@ build:
   # py315 win: C extensions link python315.dll, not ucrt/vc14 directly (overdepending)
   ignore_run_exports:  # [win]
     - vs2015_runtime   # [win]
+    - vc14_runtime     # [win]
+    - vc               # [win]
     - ucrt             # [win]
+  ignore_run_exports_from:  # [win]
+    - {{ compiler('c') }}   # [win]
+    - {{ stdlib('c') }}     # [win]
 
 requirements:
   build:
