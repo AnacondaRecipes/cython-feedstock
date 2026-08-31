@@ -1,9 +1,0 @@
-# Until AnacondaRecipes/aggregate#534 merges: t-only overlay.
-python:
-  - "3.14.* *_cp314t"
-numpy:
-  - 2.3
-zip_keys:
-  -
-    - python
-    - numpy
