@@ -5,5 +5,5 @@ build_env_vars:
 channels:
   - https://staging.continuum.io/pbp/fs/flit-feedstock/pr23/4df3dd3
   - https://staging.continuum.io/pbp/fs/setuptools-feedstock/pr109/cac687d
-  - https://staging.continuum.io/pbp/fs/pyproject_hooks-feedstock/pr5/1345d3f
-  - https://staging.continuum.io/pbp/fs/pyproject-metadata-feedstock/pr8/0945775
+  - https://staging.continuum.io/pbp/fs/pyproject_hooks-feedstock/pr5/9fd2d26
+  - https://staging.continuum.io/pbp/fs/pyproject-metadata-feedstock/pr8/f22dbd0
