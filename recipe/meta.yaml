@@ -10,13 +10,22 @@ source:
   sha256: eed0d93fbca7087f143b42c34b05a825849bdf17f101572c2105acfa49aa88b8
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   entry_points:
     - cython = Cython.Compiler.Main:setuptools_main
     - cythonize = Cython.Build.Cythonize:main
     - cygdb = Cython.Debugger.Cygdb:main
   skip: true  # [py<310]
+  # py315 win: C extensions link python315.dll, not ucrt/vc14 directly (overdepending)
+  ignore_run_exports:              # [win and py>=315]
+    - vs2015_runtime               # [win and py>=315]
+    - vc14_runtime                 # [win and py>=315]
+    - vc                           # [win and py>=315]
+    - ucrt                         # [win and py>=315]
+  ignore_run_exports_from:         # [win and py>=315]
+    - {{ compiler('c') }}          # [win and py>=315]
+    - {{ stdlib('c') }}            # [win and py>=315]
 
 requirements:
   build:
